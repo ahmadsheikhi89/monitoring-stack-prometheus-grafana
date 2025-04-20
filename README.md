@@ -1,5 +1,4 @@
 
-```markdown
 ![Banner](https://raw.githubusercontent.com/ahmadsheikhi89/monitoring-stack-prometheus-grafana/main/banner.png)
 
 # 📊 **Full Monitoring Stack with Prometheus, Grafana, Alertmanager & Node Exporter**
@@ -147,3 +146,4 @@ docker compose restart
 
 Built for DevOps, SysAdmins, and anyone who loves clean metrics & beautiful dashboards.  
 No headaches. Just data. 📊💚
+```
