@@ -121,32 +121,31 @@ groups:
 
 ## 📈 grafana_datasource.yml config file : 
 ```bash
-groups:
-  - name: example_alert_rules
-    rules:
-      - alert: HighCPUUsage
-        expr: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 80
-        for: 1m
-        labels:
-          severity: warning
-        annotations:
-          summary: "High CPU usage detected"
-          description: "CPU usage is above 80% for more than 1 minute."
+apiVersion: 1
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
 ```
 
-##  🚨 alert_rules.yml config file : 
+##  🚨 alertmanager.yml config file : 
 ```bash
-groups:
-  - name: example_alert_rules
-    rules:
-      - alert: HighCPUUsage
-        expr: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 80
-        for: 1m
-        labels:
-          severity: warning
-        annotations:
-          summary: "High CPU usage detected"
-          description: "CPU usage is above 80% for more than 1 minute."
+global:
+  smtp_smarthost: 'smtp.protonmail.com:587'
+  smtp_from: 'your-alerts@protonmail.com'
+  smtp_auth_username: 'your-alerts@protonmail.com'
+  smtp_auth_password: 'your-password'  # use secrets in production
+
+route:
+  receiver: 'email-alert'
+
+receivers:
+  - name: 'email-alert'
+    email_configs:
+      - to: 'your-email@protonmail.com'
+        send_resolved: true
 ```
 
 ## 🛠️ **How to Run (Step-by-Step)**
