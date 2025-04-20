@@ -1,3 +1,5 @@
+![Banner](https://raw.githubusercontent.com/ahmadsheikhi89/gitlab-runner-docker-setup/main/banner.png)
+
 # 📊 Full Monitoring Stack with Prometheus, Grafana, Alertmanager & Node Exporter
 
 Welcome to your **plug-and-play monitoring solution**!  
