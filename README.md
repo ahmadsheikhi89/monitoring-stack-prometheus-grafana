@@ -88,7 +88,7 @@ volumes:
 ```
 
 ---
-## 🔍 **Prometheus**  | Time-series database and monitoring system   
+## 🔍 Prometheus | prometheus.yml config : 
 ```bash
 global:
   scrape_interval: 15s
