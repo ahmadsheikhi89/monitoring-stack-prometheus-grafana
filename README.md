@@ -4,6 +4,7 @@
 ![Shell Script](https://img.shields.io/badge/shell-bash-blue?logo=gnu-bash)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![OS: Rocky Linux 9.5](https://img.shields.io/badge/OS-Rocky%20Linux%209.5-00bfff?logo=linux)
+![OS: Ubuntu](https://img.shields.io/badge/OS-Ubuntu-00bfff?logo=ubuntu)
 
 # 📊 **Full Monitoring Stack with Prometheus, Grafana, Alertmanager & Node Exporter**
 
