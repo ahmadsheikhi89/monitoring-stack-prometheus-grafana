@@ -88,6 +88,21 @@ volumes:
 ```
 
 ---
+```bash
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+rule_files:
+  - "alert_rules.yml"
+```
 
 ## 🛠️ **How to Run (Step-by-Step)**
 
