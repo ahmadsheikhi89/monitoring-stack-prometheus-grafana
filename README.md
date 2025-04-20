@@ -161,10 +161,10 @@ The backup service copies Prometheus TSDB data every 24 hours into backups/YYYYM
 
 You can restore any snapshot simply by stopping the stack and replacing the data:
 
----bash
+```bash
 docker compose down
 cp -r backups/20250420_070000/* prometheus_data/
-docker compose up -d
+docker compose up -d``` 
 
 ---
 
