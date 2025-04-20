@@ -1,153 +1,111 @@
+# Monitoring Stack
 
-```markdown
-<h1 align="center">Monitoring Stack</h1>
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-<p align="center">
-  A full-featured monitoring stack using <strong>Prometheus</strong>, <strong>Grafana</strong>, <strong>Alertmanager</strong>, and <strong>Node Exporter</strong> — containerized with Docker Compose.
-</p>
+A minimal and extensible monitoring stack using **Docker Compose**, featuring:
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Monitoring-Docker%20Stack-blue?style=flat-square" alt="Monitoring Stack Badge" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="MIT License" />
-  <img src="https://img.shields.io/badge/Prometheus-Metrics-red?style=flat-square" />
-  <img src="https://img.shields.io/badge/Grafana-Dashboards-orange?style=flat-square" />
-</p>
+- Prometheus for metrics collection
+- Grafana for visualization
+- Node Exporter for system metrics
+- Alertmanager for notifications
+- Daily Prometheus backups
 
 ---
 
-## What's Inside?
+## Features
 
-| Component       | Purpose                                  | Default Port |
-|----------------|-------------------------------------------|--------------|
-| Prometheus      | Metrics collection & alerting            | `9090`       |
-| Grafana         | Dashboards & visualizations              | `3000`       |
-| Alertmanager    | Alert routing and notifications          | `9093`       |
-| Node Exporter   | System metrics exporter                  | `9100`       |
-| Alpine Backup   | Daily backup of Prometheus data          | N/A          |
+- Metrics collection with Prometheus
+- Pre-configured Grafana with dashboards and Prometheus datasource
+- Alerting via Alertmanager with sample alert rules
+- Daily backups of Prometheus data using a lightweight Alpine container
+- Node Exporter to monitor system-level metrics
 
 ---
 
-## Project Structure
+## Requirements
 
-```bash
-.
-├── alertmanager.yml               # Alertmanager configuration
-├── alert_rules.yml               # Prometheus custom alert rules
-├── backups/                      # Prometheus TSDB daily backups
-├── backup.sh                     # Manual backup script
-├── dashboards/                   # Grafana dashboards (JSON)
-├── default-dashboard.json        # Default Grafana dashboard
-├── docker-compose.yml            # Docker Compose configuration
-├── grafana_datasource.yml        # Grafana datasource provisioning
-├── grafana_dashboards.yml        # Grafana dashboard provisioning
-└── prometheus.yml                # Prometheus configuration
-```
+- Docker
+- Docker Compose
 
 ---
 
-## How to Use
+## Getting Started
 
-### Step 1: Clone the Repository
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/your-username/monitoring-stack.git
 cd monitoring-stack
 ```
 
-### Step 2: Start All Services
+### 2. Directory Structure
 
-```bash
-docker compose up -d
+```
+monitoring-stack/
+├── alertmanager.yml
+├── alert_rules.yml
+├── backup.sh
+├── backups/                  # Daily backups go here
+├── dashboards/               # Custom Grafana dashboards in JSON format
+├── default-dashboard.json    # Default dashboard
+├── docker-compose.yml
+├── grafana_datasource.yml
+├── grafana_dashboards.yml    # Grafana dashboards provisioner config
+├── prometheus.yml
+└── README.md
 ```
 
-### Step 3: Access Services
+### 3. Run the stack
 
-- **Grafana:** [http://localhost:3000](http://localhost:3000)  
-  **User:** `admin` | **Pass:** `admin`
-- **Prometheus:** [http://localhost:9090](http://localhost:9090)
-- **Alertmanager:** [http://localhost:9093](http://localhost:9093)
-- **Node Exporter:** [http://localhost:9100](http://localhost:9100/metrics)
+```bash
+docker-compose up -d
+```
+
+- Grafana: [http://localhost:3000](http://localhost:3000)
+- Prometheus: [http://localhost:9090](http://localhost:9090)
+- Alertmanager: [http://localhost:9093](http://localhost:9093)
+- Node Exporter: [http://localhost:9100](http://localhost:9100)
 
 ---
 
 ## Health Check
 
-Want to make sure everything is running? Run:
+You can verify all services are running properly with:
 
 ```bash
 docker ps
 ```
 
-You should see all 5 containers running. To confirm service health:
-
-```bash
-curl -s localhost:9090/-/healthy
-curl -s localhost:3000/api/health
-```
-
-If everything is OK, you'll get `{“status”:“ok”}` from Grafana and `Prometheus is Healthy` message.
+Ensure containers for `prometheus`, `grafana`, `node_exporter`, `alertmanager`, and `prometheus_backup` are listed and in the "Up" state.
 
 ---
 
-## Custom Dashboards in Grafana
+## Backup System
 
-1. Export a dashboard from Grafana as JSON.
-2. Put it inside the `dashboards/` folder.
-3. Grafana auto-loads dashboards from this directory.
+Prometheus data is backed up daily via the `backup` service (based on Alpine). Backups are stored in the `backups/` folder, timestamped by date.
 
-Dashboard provisioning is handled via `grafana_dashboards.yml` and linked on container start.
-
----
-
-## Backup Strategy (Automated)
-
-An `alpine` container creates **daily backups** of Prometheus TSDB data into the `backups/` folder with a timestamp.
-
-### Want to Backup Now?
-
-Just run:
+To verify backup:
 
 ```bash
-./backup.sh
+ls backups/
 ```
-
-Or copy manually inside the container:
-
-```bash
-docker exec prometheus_backup sh -c "cp -r /prometheus /backups/$(date +%Y%m%d_%H%M%S)"
-```
-
----
-
-## Stopping the Stack
-
-To stop and remove all services:
-
-```bash
-docker compose down
-```
-
----
-
-## Troubleshooting
-
-- Check logs if anything fails:
-
-```bash
-docker compose logs -f
-```
-
-- If Grafana has no data:
-  - Make sure Prometheus target is `UP`
-  - Check `grafana_datasource.yml` is correctly mounted
 
 ---
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-```
 
 ---
 
-اگه خواستی نسخه Markdown فایل رو هم بهت بدم که مستقیماً توی `README.md` بندازی، فقط بگو. همچنین اگه بج یا بنر شخصی‌سازی شده برای برند خودت خواستی، طراحی‌شو هم می‌تونم انجام بدم.
+## Notes
+
+- Modify the alert rules in `alert_rules.yml` as needed.
+- You can add more dashboards in JSON format inside the `dashboards/` directory.
+- Grafana provisioning automatically loads the default dashboard and datasource.
+
+---
+
+## Credits
+
+Built by engineers who love visibility and automation.
