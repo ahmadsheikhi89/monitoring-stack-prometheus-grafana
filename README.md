@@ -119,7 +119,7 @@ groups:
           description: "CPU usage is above 80% for more than 1 minute."
 ```
 
-## grafana_datasource.yml config file : 
+## 📈 grafana_datasource.yml config file : 
 ```bash
 groups:
   - name: example_alert_rules
