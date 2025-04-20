@@ -117,7 +117,8 @@ groups:
         annotations:
           summary: "High CPU usage detected"
           description: "CPU usage is above 80% for more than 1 minute."
-        ```
+```
+
 ## 🛠️ **How to Run (Step-by-Step)**
 
 ### 📥 **1. Clone the Repository**
