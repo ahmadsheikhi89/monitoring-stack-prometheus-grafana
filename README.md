@@ -146,4 +146,3 @@ docker compose restart
 
 Built for DevOps, SysAdmins, and anyone who loves clean metrics & beautiful dashboards.  
 No headaches. Just data. 📊💚
-```
