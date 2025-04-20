@@ -1,6 +1,15 @@
 
 ![Banner](https://raw.githubusercontent.com/ahmadsheikhi89/monitoring-stack-prometheus-grafana/main/banner.png)
 
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🐧 Linux Compatibility
+
+This monitoring stack is fully compatible with Linux systems. It has been tested on major Linux distributions such as Ubuntu, CentOS, and Debian. It also supports any system that has Docker and Docker Compose installed.
+
+---
 # 📊 **Full Monitoring Stack with Prometheus, Grafana, Alertmanager & Node Exporter**
 
 Welcome to your **plug-and-play monitoring solution**!  
