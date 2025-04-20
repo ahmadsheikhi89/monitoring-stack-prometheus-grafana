@@ -1,5 +1,4 @@
 
-```markdown
 # 🖥️ Monitoring Stack with Prometheus + Grafana + Alertmanager
 
 A professional, easy-to-deploy monitoring stack for Linux servers and Dockerized applications using Prometheus, Grafana, and Alertmanager.
@@ -143,4 +142,3 @@ This project is licensed under the [MIT License](LICENSE).
 For custom setups, just tweak and `docker compose restart`.
 
 Enjoy monitoring like a pro 🚀
-```
