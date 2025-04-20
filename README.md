@@ -1,6 +1,4 @@
 
-## ✅ Final `README.md` in English (with emojis)
-
 ```markdown
 # 📊 Full Monitoring Stack with Prometheus, Grafana, Alertmanager & Node Exporter
 
