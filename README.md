@@ -137,7 +137,7 @@ docker compose restart
 (*You’ll be prompted to change the password on first login.*)
 
 ---
-Recommended Dashboards
+## 📊 Recommended Dashboards
 
 You can import these from Grafana Dashboards:
 
