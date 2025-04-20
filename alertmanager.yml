@@ -1,0 +1,14 @@
+global:
+  smtp_smarthost: 'smtp.protonmail.com:587'
+  smtp_from: 'your-alerts@protonmail.com'
+  smtp_auth_username: 'your-alerts@protonmail.com'
+  smtp_auth_password: 'your-password'  # use secrets in production
+
+route:
+  receiver: 'email-alert'
+
+receivers:
+  - name: 'email-alert'
+    email_configs:
+      - to: 'your-email@protonmail.com'
+        send_resolved: true
