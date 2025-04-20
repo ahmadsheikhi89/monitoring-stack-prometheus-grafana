@@ -1,144 +1,127 @@
 
-# 🖥️ Monitoring Stack with Prometheus + Grafana + Alertmanager
+```markdown
+# 🚀 Monitoring Stack with Prometheus, Grafana, Alertmanager & Node Exporter
 
-A professional, easy-to-deploy monitoring stack for Linux servers and Dockerized applications using Prometheus, Grafana, and Alertmanager.
-
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Docker Compose](https://img.shields.io/badge/Docker--Compose-v3.8-blue)
+یک استک کامل برای مانیتورینگ سیستم با استفاده از Docker Compose.
+کامل کانفیگ شده، بدون نیاز به هیچ کار اضافه. فقط اجرا کن و لذت ببر!
 
 ---
 
-## 📁 Project Structure
+## 📦 فایل `docker-compose.yml`
 
+```yaml
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./alert_rules.yml:/etc/prometheus/alert.rules.yml
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana_datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+      - ./default-dashboard.json:/etc/grafana/provisioning/dashboards/default-dashboard.json
+    ports:
+      - "3000:3000"
+
+  alertmanager:
+    image: quay.io/prometheus/alertmanager:latest
+    container_name: alertmanager
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/config.yml
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+    ports:
+      - "9093:9093"
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node_exporter
+    ports:
+      - "9100:9100"
+
+  backup:
+    image: alpine:latest
+    container_name: prometheus_backup
+    volumes:
+      - prometheus_data:/prometheus
+      - ./backups:/backups
+    entrypoint: ["/bin/sh", "-c", "while true; do cp -r /prometheus /backups/$(date +%Y%m%d_%H%M%S); sleep 86400; done"]
+
+volumes:
+  prometheus_data:
+  grafana_data:
 ```
-monitoring-stack/
-├── alertmanager.yml              # Alertmanager configuration
-├── alert_rules.yml               # Prometheus alert rules
-├── backup.sh                     # Prometheus backup script (runs every 24h)
-├── backups/                      # Backup directory (auto-created)
-├── dashboards/                   # JSON Grafana dashboards
-│   └── system-overview.json      # Example dashboard file
-├── grafana_dashboards.yml        # Dashboard provisioning config
-├── grafana_datasource.yml        # Prometheus datasource config for Grafana
-├── prometheus.yml                # Prometheus main configuration
-├── docker-compose.yml            # All services defined here
-└── README.md                     # You're here now
-```
 
 ---
 
-## 🚀 Quick Start
+## 🛠️ دستورات موردنیاز
 
-### 🧰 Requirements
+قدم‌به‌قدم و بدون دردسر:
 
-- Docker 🐳
-- Docker Compose 📦
-
-### 🛠️ Setup Instructions
-
-1. **Clone the project**
-   ```bash
-   git clone https://github.com/yourname/monitoring-stack.git
-   cd monitoring-stack
-   ```
-
-2. **Pull all Docker images**
-   ```bash
-   docker compose pull
-   ```
-
-3. **Start the stack**
-   ```bash
-   docker compose up -d
-   ```
-
-4. **Access Grafana**
-   - URL: [http://localhost:3000](http://localhost:3000)
-   - Default user: `admin`
-   - Default pass: `admin` (you will be asked to change it)
-
----
-
-## 🐳 Docker Compose Services
-
-### 🔹 Prometheus
-- Port: `9090`
-- Config: `prometheus.yml`
-- Alert Rules: `alert_rules.yml`
-
-### 🔹 Grafana
-- Port: `3000`
-- Auto-provisions:
-  - **Datasource:** Prometheus
-  - **Dashboards:** From `dashboards/` folder
-
-### 🔹 Alertmanager
-- Port: `9093`
-- Config: `alertmanager.yml`
-
-### 🔹 Node Exporter
-- Port: `9100`
-- Monitors host metrics (CPU, memory, disk, etc.)
-
-### 🔹 Prometheus Backup Service
-- Image: `alpine`
-- Runs `backup.sh`
-- Saves daily snapshots in `backups/` folder
-- Automatically timestamps folders
-
----
-
-## 💾 Backup System
-
-The backup service copies Prometheus TSDB data every 24 hours into `backups/YYYYMMDD_HHMMSS`.
-
-You can restore any snapshot simply by stopping the stack and replacing the data:
-
+### 1. کلون پروژه
 ```bash
-docker compose down
-cp -r backups/20250420_070000/* prometheus_data/
+git clone https://github.com/yourname/monitoring-stack.git
+cd monitoring-stack
+```
+
+### 2. اجرای پروژه (اولین بار)
+```bash
 docker compose up -d
 ```
 
----
+> تمام سرویس‌ها (Prometheus, Grafana, Alertmanager, Node Exporter, Backup) با هم بالا میان.
 
-## ❤️ Health Check (Manual)
+### 3. دیدن لاگ سرویس‌ها (اختیاری)
+```bash
+docker compose logs -f
+```
 
-Although healthcheck isn’t implemented via Docker's native `healthcheck`, here are ways to test:
+### 4. استاپ و خاموش کردن سرویس‌ها
+```bash
+docker compose down
+```
 
-- Grafana: `curl http://localhost:3000/api/health`
-- Prometheus: `curl http://localhost:9090/-/ready`
-- Alertmanager: `curl http://localhost:9093/-/ready`
-
-For scripting healthchecks or monitoring, you can implement external probes or use tools like Blackbox Exporter.
-
----
-
-## 📊 Recommended Dashboards
-
-You can import these from [Grafana Dashboards](https://grafana.com/grafana/dashboards/):
-
-- **Node Exporter Full**: `1860`
-- **Docker Monitoring**: `179`
-- **Linux Server Dashboard**: `11074`
-- **System Overview**: Custom one provided in `dashboards/`
-
-To add more dashboards, drop the JSON file into the `dashboards/` folder and restart Grafana.
+### 5. ریستارت سرویس‌ها (مثلاً بعد از تغییر تنظیمات)
+```bash
+docker compose restart
+```
 
 ---
 
-## 📝 License
+## 🌐 دسترسی به سرویس‌ها
 
-This project is licensed under the [MIT License](LICENSE).
+| سرویس         | آدرس دسترسی                     |
+|---------------|-----------------------------------|
+| Prometheus    | [http://localhost:9090](http://localhost:9090) |
+| Grafana       | [http://localhost:3000](http://localhost:3000) |
+| Alertmanager  | [http://localhost:9093](http://localhost:9093) |
+| Node Exporter | [http://localhost:9100/metrics](http://localhost:9100/metrics) |
 
 ---
 
-## 💡 Tip for DevOps
+## 📈 یوزر و پسورد Grafana
 
-- You don’t need to be a Prometheus/Grafana guru.
-- The stack works out-of-the-box.
-- All configs are mounted so you can change without rebuilding.
+- **Username:** `admin`
+- **Password:** `admin` (در اولین ورود از شما خواسته میشه تغییرش بدین)
 
-For custom setups, just tweak and `docker compose restart`.
+---
 
-Enjoy monitoring like a pro 🚀
+## ⚡ نکته نهایی
+
+> تمام سرویس‌ها و تنظیمات از قبل آماده شده‌اند.
+> فقط کافیست Docker و Docker Compose روی سیستم شما نصب باشد.
+> به‌سادگی می‌توانید با تغییر فایل‌های YAML موجود، سرویس‌ها را به دلخواه خود شخصی‌سازی کنید.
+
+---
