@@ -205,20 +205,26 @@ docker compose restart
 (*You’ll be prompted to change the password on first login.*)
 
 ---
-## 📊 Recommended Dashboards
+## 📊 Grafana Dashboards
 
-You can import these from Grafana Dashboards:
+Grafana is preconfigured with Prometheus as the default data source. You can easily import community dashboards or build your own to gain real-time insights.
 
-    Node Exporter Full: 1860
+⭐ Recommended Dashboards from Grafana Labs
 
-    Docker Monitoring: 179
+To import:
+1. Go to Grafana → Dashboard → + Import
+2. Enter the dashboard ID and click Load
+3. Select your Prometheus data source and click Import
 
-    Linux Server Dashboard: 11074
+⚙️ Auto-Provisioning (Optional)
 
-    System Overview: Custom one provided in dashboards/
+To automatically load dashboards on Grafana startup:
 
-To add more dashboards, drop the JSON file into the dashboards/ folder and restart Grafana.
+Place .json dashboard files into the dashboards/ directory
 
+Update the grafana/provisioning/dashboards/default-dashboard.json file accordingly
+
+Grafana will scan and auto-import dashboards during container startup.
 ---
 
 ---
