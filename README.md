@@ -104,7 +104,20 @@ scrape_configs:
 rule_files:
   - "alert_rules.yml"
 ```
-
+## 🚨 Alertmanager| alert_rules.yml config file : 
+```bash
+groups:
+  - name: example_alert_rules
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 80
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage is above 80% for more than 1 minute."
+        ```
 ## 🛠️ **How to Run (Step-by-Step)**
 
 ### 📥 **1. Clone the Repository**
