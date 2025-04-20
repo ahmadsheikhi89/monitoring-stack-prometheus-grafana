@@ -1,6 +1,3 @@
-حتماً احمد جان، اینم نسخه‌ی حرفه‌ای‌تر و کامل‌تر `README.md` با توضیح **Backup**، **Health Check** و نکات مهم برای آدمی که هیچ چیز ندونه ولی بخواد راه بندازه:
-
----
 
 ```markdown
 <h1 align="center">Monitoring Stack</h1>
