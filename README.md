@@ -1,4 +1,4 @@
-![Banner](https://github.com/ahmadsheikhi89/monitoring-stack-prometheus-grafana/edit/main/banner.png)
+![Banner](https://raw.githubusercontent.com/ahmadsheikhi89/monitoring-stack-prometheus-grafana/main/banner.png)
 
 # 📊 Full Monitoring Stack with Prometheus, Grafana, Alertmanager & Node Exporter
 
