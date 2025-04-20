@@ -150,7 +150,19 @@ You can import these from Grafana Dashboards:
     System Overview: Custom one provided in dashboards/
 
 To add more dashboards, drop the JSON file into the dashboards/ folder and restart Grafana.
+---
+💾 Backup System
 
+The backup service copies Prometheus TSDB data every 24 hours into backups/YYYYMMDD_HHMMSS.
+
+You can restore any snapshot simply by stopping the stack and replacing the data:
+
+docker compose down
+cp -r backups/20250420_070000/* prometheus_data/
+docker compose up -d
+
+
+---
 ## 🧠 **Notes**
 
 - All configurations are preloaded and ready to go.
