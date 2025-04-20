@@ -160,7 +160,7 @@ To add more dashboards, drop the JSON file into the dashboards/ folder and resta
 The backup service copies Prometheus TSDB data every 24 hours into backups/YYYYMMDD_HHMMSS.
 
 You can restore any snapshot simply by stopping the stack and replacing the data:
-
+---bash
 docker compose down
 cp -r backups/20250420_070000/* prometheus_data/
 docker compose up -d
