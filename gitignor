@@ -1,0 +1,26 @@
+# 🔒 Ignore backups and volume data
+backups/
+grafana_data/
+prometheus_data/
+
+# 🐳 Docker artifacts
+*.pid
+*.sock
+
+# 🧪 Logs & temp files
+*.log
+*.tmp
+*.swp
+
+# 🚫 System files
+.DS_Store
+Thumbs.db
+
+# 💻 IDE & Editor configs
+.vscode/
+.idea/
+*.iml
+
+# 📦 Python cache (if you ever script something)
+__pycache__/
+*.pyc
