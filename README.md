@@ -165,6 +165,7 @@ You can restore any snapshot simply by stopping the stack and replacing the data
 docker compose down
 cp -r backups/20250420_070000/* prometheus_data/
 docker compose up -d
+
 ---
 
 ## 🧠 **Notes**
