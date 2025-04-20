@@ -144,7 +144,3 @@ For custom setups, just tweak and `docker compose restart`.
 
 Enjoy monitoring like a pro 🚀
 ```
-
----
-
-اگه تأییدش کردی، می‌تونم همینو به‌صورت فایل `README.md` هم برات آپلود کنم تا مستقیم بذاری تو ریشه پروژه‌ت. آماده‌اش کنم؟
