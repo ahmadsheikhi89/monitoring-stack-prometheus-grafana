@@ -137,6 +137,19 @@ docker compose restart
 (*You’ll be prompted to change the password on first login.*)
 
 ---
+Recommended Dashboards
+
+You can import these from Grafana Dashboards:
+
+    Node Exporter Full: 1860
+
+    Docker Monitoring: 179
+
+    Linux Server Dashboard: 11074
+
+    System Overview: Custom one provided in dashboards/
+
+To add more dashboards, drop the JSON file into the dashboards/ folder and restart Grafana.
 
 ## 🧠 **Notes**
 
