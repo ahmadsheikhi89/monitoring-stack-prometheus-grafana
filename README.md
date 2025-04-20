@@ -5,6 +5,8 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![OS: Rocky Linux 9.5](https://img.shields.io/badge/OS-Rocky%20Linux%209.5-00bfff?logo=linux)
 ![OS: Ubuntu](https://img.shields.io/badge/OS-Ubuntu-00bfff?logo=ubuntu)
+![Docker](https://img.shields.io/badge/docker-ready-blue?logo=docker)
+![Docker Compose](https://img.shields.io/badge/docker--compose-enabled-blue?logo=docker)
 
 # 📊 **Full Monitoring Stack with Prometheus, Grafana, Alertmanager & Node Exporter**
 
