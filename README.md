@@ -148,6 +148,13 @@ receivers:
         send_resolved: true
 ```
 
+## 💾 backup.sh config file : 
+```bash
+#!/bin/sh
+mkdir -p ./backups
+cp -r ./prometheus_data ./backups/$(date +%Y%m%d_%H%M%S)
+```
+
 ## 🛠️ **How to Run (Step-by-Step)**
 
 ### 📥 **1. Clone the Repository**
