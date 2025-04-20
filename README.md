@@ -88,6 +88,7 @@ volumes:
 ```
 
 ---
+## 🔍 **Prometheus**  | Time-series database and monitoring system   
 ```bash
 global:
   scrape_interval: 15s
