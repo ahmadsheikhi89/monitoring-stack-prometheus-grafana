@@ -1,9 +1,10 @@
 
 ![Banner](https://raw.githubusercontent.com/ahmadsheikhi89/monitoring-stack-prometheus-grafana/main/banner.png)
 
-[![GitHub license](https://img.shields.io/github/license/ahmadsheikhi89/monitoring-stack-prometheus-grafana?style=for-the-badge)](https://github.com/ahmadsheikhi89/monitoring-stack-prometheus-grafana/blob/main/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/ahmadsheikhi89/monitoring-stack-prometheus-grafana?style=for-the-badge)](https://github.com/ahmadsheikhi89/monitoring-stack-prometheus-grafana/stargazers)
 ![Shell Script](https://img.shields.io/badge/shell-bash-blue?logo=gnu-bash)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![OS: Rocky Linux 9.5](https://img.shields.io/badge/OS-Rocky%20Linux%209.5-00bfff?logo=linux)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 # 📊 **Full Monitoring Stack with Prometheus, Grafana, Alertmanager & Node Exporter**
 
